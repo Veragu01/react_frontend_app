@@ -1,10 +1,47 @@
 .App {
-  text-align: center;
+  text-align: left;
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+.appointment-form {
+  max-width: 700px;
+}
+
+.appointment-form .form-row {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  align-items: start;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.appointment-form label {
+  padding-top: 8px;
+}
+
+.appointment-form input,
+.appointment-form select,
+.appointment-form textarea {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.appointment-form textarea {
+  min-height: 100px;
+}
+
+@media (max-width: 600px) {
+  .appointment-form .form-row {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .appointment-form label {
+    padding-top: 0;
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {
