@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import {Link} from "react-router-dom";
 import Nav from "react-bootstrap/esm/Nav";
+import {BASEURL} from "../Constraints";
 
 function FetchTimeslots(props) {
   const [timeslots, setTimeslots] = useState([]);
@@ -17,7 +18,7 @@ function fetchTimeslots() {
   console.log("Token exists:", Boolean(token)); // Don't log the token itself.
 
   axios
-    .get("http://127.0.0.1:8000/api/timeslots/", {
+    .get(`${BASEURL}/api/timeslots/`, {
       headers: {
         Authorization: `Token ${token}`,
       },

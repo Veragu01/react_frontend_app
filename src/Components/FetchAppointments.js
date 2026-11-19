@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import {Link} from "react-router-dom";
 import FetchAppointmentDetail from "../pages/AppointmentDetail";
+import {BASEURL} from "../Constraints";
 
 function FetchAppointments() {
   const [appointments, setAppointments] = useState([]);
@@ -17,7 +18,7 @@ function fetchAppointments() {
   setUserType(user_type)
 
   axios
-    .get("http://127.0.0.1:8000/api/appointments/", {
+    .get(`${BASEURL}/api/appointments/`, {
       headers: {
         Authorization: `Token ${token}`,
       },

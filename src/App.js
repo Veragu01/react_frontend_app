@@ -21,6 +21,15 @@ import TimeslotDetails from "./pages/TimeslotDetails";
 import UpdateTimeslot from "./pages/UpdateTimeslot";
 import CreateTimeslot from "./pages/CreateTimeslot";
 import CreateAppointment from "./pages/CreateAppointment";
+import ManagePatients from "./pages/ManagePatients";
+import CreatePatient from "./pages/CreatePatient";
+import FetchPatientDetails from "./Components/FetchPatientDetails";
+import PatientDetails from "./pages/PatientDetails";
+import ManageDoctors from "./pages/ManageDoctors";
+import DoctorDetails from "./pages/DoctorDetails";
+import CreateDoctor from "./pages/CreateDoctor";
+import UpdateDoctor from "./pages/UpdateDoctor";
+import UpdatePatient from "./pages/UpdatePatient";
 
 
 
@@ -59,28 +68,13 @@ function App() {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                       <Nav className="me-auto">
-                          {/*<Nav.Link href="/">Home</Nav.Link>*/}
                           <Nav.Link href="/appointments">Appointments</Nav.Link>
-                          {/*<Nav.Link href="/conditions">Conditions</Nav.Link>*/}
-                          {/*<Nav.Link href="/forms">Forms</Nav.Link>*/}
-                          {/*<Nav.Link href="/fetchdata">Fetch Data</Nav.Link>*/}
-                          {/*<Nav.Link href="/reducerdemo">Reducer Demo</Nav.Link>*/}
-                          {/*<Nav.Link href="/fetchdatareducer">Fetch Data Reducer</Nav.Link>*/}
                           {Token && user_type === "doctor" && (<Nav.Link href="/timeslots">Timeslots</Nav.Link>)}
                           {Token && user_type === "administrator" && (<Nav.Link href="/timeslots">Timeslots</Nav.Link>)}
+                          {Token && user_type === "administrator" && (<Nav.Link href="/patients">Manage Patients</Nav.Link>)}
+                          {Token && user_type === "administrator" && (<Nav.Link href="/doctors">Manage Doctors</Nav.Link>)}
                           <Nav.Link href="/login"> {Token ? "Logout" : "Login"} </Nav.Link>
-                          {/*<Nav.Link href="/simpleblogposts">Simple Blog Posts</Nav.Link>*/}
-                        {/*<NavDropdown title="Dropdown" id="basic-nav-dropdown">*/}
-                        {/*  <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>*/}
-                        {/*  <NavDropdown.Item href="#action/3.2">*/}
-                        {/*    Another action*/}
-                        {/*  </NavDropdown.Item>*/}
-                        {/*  <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>*/}
-                        {/*  <NavDropdown.Divider />*/}
-                        {/*  <NavDropdown.Item href="#action/3.4">*/}
-                        {/*    Separated link*/}
-                        {/*  </NavDropdown.Item>*/}
-                        {/*</NavDropdown>*/}
+
                       </Nav>
                     </Navbar.Collapse>
                   </Container>
@@ -97,19 +91,20 @@ function App() {
                     <Route path="/timeslots/:id" element={<TimeslotDetails token={Token} />}/>
                     <Route path="/timeslots/:id/update" element={<UpdateTimeslot token={Token} />}/>
                     <Route path="/timeslots/create" element={<CreateTimeslot token={Token} />}/>
-                    {/*<Route path="/forms" element={<Forms/>}/>*/}
-                    {/*<Route path="/fetchdata" element={<FetchData/>}/>*/}
-                    {/*<Route path="/reducerdemo" element={<ReducerDemo/>}/>*/}
-                    {/*<Route path="/fetchdatareducer" element={<FetchDataReducer/>}/>*/}
+                    <Route path="/patients" element={<ManagePatients token={Token}/>}/>
+                    <Route path="/patients/:id" element={<PatientDetails token={Token}/>}/>
+                    <Route path="/patients/create" element={<CreatePatient token={Token}/>}/>
+                    <Route path="/patients/:id/update" element={<UpdatePatient token={Token} />} />
+                    <Route path="/doctors" element={<ManageDoctors token={Token} />} />
+                    <Route path="/doctors/:id" element={<DoctorDetails token={Token} />} />
+                    <Route path="/doctors/create" element={<CreateDoctor token={Token} />} />
+                    <Route path="/doctors/:id/update" element={<UpdateDoctor token={Token} />} />
+
                     <Route path="/login" element={ <Login onLogin={login} onLogout={logout} token={Token}/>}/>
-                    {/*<Route path="/simpleblogposts" element={<SimpleBlogPosts/>}/>*/}
                 </Routes>
             </div>
         </BrowserRouter>
-      {/*  <Navbar />*/}
-      {/*<h1>Clinic Appointment System</h1>*/}
-      {/*<p>App is running</p>*/}
-      {/*  <FetchDoctors />*/}
+
     </div>
   );
 }
