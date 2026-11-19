@@ -20,6 +20,7 @@ import DoctorTimeslots from "./pages/DoctorTimeslots";
 import TimeslotDetails from "./pages/TimeslotDetails";
 import UpdateTimeslot from "./pages/UpdateTimeslot";
 import CreateTimeslot from "./pages/CreateTimeslot";
+import CreateAppointment from "./pages/CreateAppointment";
 
 
 
@@ -91,6 +92,7 @@ function App() {
                     <Route path="/appointments" element={<Appointments token={Token}/>}/>
                     <Route path="/appointments/:id" element={<AppointmentDetail token={Token} />}/>
                     <Route path="/appointments/:id/update" element={<UpdateAppointment token={Token} />}/>
+                    <Route path="/appointments/create" element={<CreateAppointment token={Token} />}/>
                     <Route path="/timeslots" element={<DoctorTimeslots token={Token}/>}/>
                     <Route path="/timeslots/:id" element={<TimeslotDetails token={Token} />}/>
                     <Route path="/timeslots/:id/update" element={<UpdateTimeslot token={Token} />}/>

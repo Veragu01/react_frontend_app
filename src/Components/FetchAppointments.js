@@ -6,10 +6,15 @@ import FetchAppointmentDetail from "../pages/AppointmentDetail";
 function FetchAppointments() {
   const [appointments, setAppointments] = useState([]);
   const [error, setError] = useState("");
+  const [token, setToken] = useState("")
+  const [userType, setUserType] = useState("")
 
 function fetchAppointments() {
   const token = localStorage.getItem("token");
+  const user_type = localStorage.getItem("user_type");
   console.log("Token exists:", Boolean(token)); // Don't log the token itself.
+  setToken(token)
+  setUserType(user_type)
 
   axios
     .get("http://127.0.0.1:8000/api/appointments/", {
@@ -33,6 +38,7 @@ function fetchAppointments() {
       <h1>Appointments</h1>
 
       {error && <p>{error}</p>}
+      {token && userType === "patient" && (<Link  to={"/appointments/create"}  className="btn btn-primary">Create New Appointment</Link>)}
 
       <ul>
         {appointments.map((appointment) => (

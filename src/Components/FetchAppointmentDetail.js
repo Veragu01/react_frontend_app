@@ -67,7 +67,7 @@ function FetchAppointmentDetail({ token: propToken }) {
       <p>Time slot: {appointment.time_slot_time}</p>
       <p>Reason: {appointment.reason}</p>
       <Link to={`/appointments/${appointment.id}/update`} className="btn btn-primary">Update</Link>
-      <button onClick={deleteAppointment} className={"btn btn-primary"}>Cancel appointment</button>
+      <button onClick={deleteAppointment} className={"ms-3 btn btn-danger"}>Cancel appointment</button>
     </div>
   );
 }

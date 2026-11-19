@@ -7,7 +7,7 @@ function FetchTimeslots(props) {
   const [timeslots, setTimeslots] = useState([]);
   const [error, setError] = useState("");
   const [token, setToken] = useState("")
-    const [userType, setUserType] = useState("")
+  const [userType, setUserType] = useState("")
 
 function fetchTimeslots() {
   const token = localStorage.getItem("token");

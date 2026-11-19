@@ -7,7 +7,6 @@ function FetchUpdateAppointment({ token: propToken }) {
   const token = propToken || localStorage.getItem("token");
   const { id } = useParams();
   const navigate = useNavigate();
-
   const [appointment, setAppointment] = useState(null);
   const [date, setDate] = useState("");
   const [slots, setSlots] = useState([]);
@@ -64,9 +63,18 @@ function FetchUpdateAppointment({ token: propToken }) {
     setError("");
 
     try {
+      const data = { date, reason };
+
+      if (!timeSlotUnchanged) {
+        if (!timeSlot) {
+          setError("Choose an available time for the new date.");
+          return;
+        }
+        data.time_slot = timeSlot;
+      }
       await axios.patch(
         `${BASEURL}/api/appointments/${id}/`,
-        { date, time_slot: timeSlot, reason },
+        data,
         { headers: { Authorization: `Token ${token}` } }
       );
       navigate(`/appointments/${id}`);
@@ -78,6 +86,10 @@ function FetchUpdateAppointment({ token: propToken }) {
 
   if (error && !appointment) return <p>{error}</p>;
   if (!appointment) return <p>Loading appointment...</p>;
+
+  const dateUnchanged = date === appointment.date;
+  const timeSlotUnchanged = String(timeSlot) === String(appointment.time_slot);
+  const currentSlotMissing = dateUnchanged && timeSlot && !slots.some((slot) => String(slot.id) === String(timeSlot));
 
   return (
     <div>
@@ -146,17 +158,35 @@ function FetchUpdateAppointment({ token: propToken }) {
 
   <div className="form-row">
     <label htmlFor="timeSlot">Available time</label>
-    <select id="timeSlot" value={timeSlot}
-            onChange={(event) => setTimeSlot(event.target.value)} required >
+    <select
+      id="timeSlot"
+      value={timeSlot}
+      onChange={(event) => setTimeSlot(event.target.value)}
+      required={!dateUnchanged}
+    >
       <option value="">Choose a time</option>
+
+      {currentSlotMissing && (
+        <option value={String(appointment.time_slot)}> {appointment.time_slot_time}</option>
+      )}
+
       {slots.map((slot) => (
         <option key={slot.id} value={String(slot.id)}>
           {slot.time}
         </option>
       ))}
-      {/*<option value="09:00">9:00 AM</option>*/}
-      {/*<option value="02:00">2:00 PM</option>*/}
     </select>
+    {/*<select id="timeSlot" value={timeSlot}*/}
+    {/*        onChange={(event) => setTimeSlot(event.target.value)} required >*/}
+    {/*  <option value="">Choose a time</option>*/}
+    {/*  {slots.map((slot) => (*/}
+    {/*    <option key={slot.id} value={String(slot.id)}>*/}
+    {/*      {slot.time}*/}
+    {/*    </option>*/}
+    {/*  ))}*/}
+    {/*  /!*<option value="09:00">9:00 AM</option>*!/*/}
+    {/*  /!*<option value="02:00">2:00 PM</option>*!/*/}
+    {/*</select>*/}
   </div>
 
   <div className="form-row">

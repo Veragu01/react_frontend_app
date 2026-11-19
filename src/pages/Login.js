@@ -79,7 +79,7 @@ function Login(props) {
                 <p>
                     Password: <input type="password" value={password} onChange={passwordHandler}></input>
                 </p>
-                <button onClick={login}>Login</button>
+                <button onClick={login} className="btn btn-primary">Login</button>
             </div>
             )
 
