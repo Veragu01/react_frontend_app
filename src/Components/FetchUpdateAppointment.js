@@ -47,11 +47,7 @@ function FetchUpdateAppointment({ token: propToken }) {
       .then(({ data }) => {
           setSlots(Array.isArray(data) ? data : data.results ?? []);
       })
-        // setSlots(data);
-        // // Keep the appointment's current slot selected if it is in the response.
-        // if (data.some((slot) => String(slot.id) === timeSlot)) return;
-        // setTimeSlot("");
-      // })
+
       .catch((error) => {
         console.error(error.response?.status, error.response?.data);
         setError("Could not load available times.");
@@ -96,51 +92,6 @@ function FetchUpdateAppointment({ token: propToken }) {
       <h1>Update appointment</h1>
       {error && <p>{error}</p>}
 
-      {/*<form onSubmit={handleSubmit}>*/}
-      {/*  <div className="mb-3 form-row">*/}
-      {/*    <label htmlFor="date">Date</label>*/}
-      {/*    <input*/}
-      {/*      id="date"*/}
-      {/*      type="date"*/}
-      {/*      value={date}*/}
-      {/*      onChange={(event) => {*/}
-      {/*        setDate(event.target.value);*/}
-      {/*        setTimeSlot("");*/}
-      {/*      }}*/}
-      {/*      required*/}
-      {/*    />*/}
-      {/*  </div>*/}
-      {/*  <div className="mb-3 form-row">*/}
-
-          {/*<label htmlFor="timeSlot">Available time</label>*/}
-          {/*<select*/}
-          {/*  id="timeSlot"*/}
-          {/*  value={timeSlot}*/}
-          {/*  onChange={(event) => setTimeSlot(event.target.value)}*/}
-          {/*  required*/}
-          {/*>*/}
-          {/*  <option value="">Choose a time</option>*/}
-          {/*  {slots.map((slot) => (*/}
-          {/*    <option key={slot.id} value={slot.id}>*/}
-          {/*      {slot.time}*/}
-          {/*    </option>*/}
-          {/*  ))}*/}
-          {/*</select>*/}
-
-      {/*  </div>*/}
-      {/*  <div className="mb-3 form-row">*/}
-      {/*    <label htmlFor="reason">Reason</label>*/}
-      {/*    <textarea*/}
-      {/*      id="reason"*/}
-      {/*      value={reason}*/}
-      {/*      onChange={(event) => setReason(event.target.value)}*/}
-      {/*      required*/}
-      {/*    />*/}
-      {/*  </div>*/}
-      {/*  <div className="mb-3 form-row">*/}
-      {/*    <button type="submit">Save changes</button>*/}
-      {/*  </div>*/}
-      {/*</form>*/}
       <form className="appointment-form" onSubmit={handleSubmit}>
   <div className="form-row">
     <label htmlFor="date">Date</label>
